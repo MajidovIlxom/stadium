@@ -18,7 +18,7 @@ export class Admin extends Model<Admin, AdminCreationAttrs>{
     @ApiProperty({example: 1, description: "Id serial number"})
     @Column({
         type: DataType.INTEGER,
-        allowNull: true,
+        autoIncrement: true,
         primaryKey: true
     })
     id: number;
@@ -75,4 +75,9 @@ export class Admin extends Model<Admin, AdminCreationAttrs>{
         type: DataType.STRING,
     })
     hashed_refresh_token: string;
+
+    @Column({
+        type: DataType.STRING
+    })
+    activation_link: string;
 }

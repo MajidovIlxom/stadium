@@ -45,13 +45,6 @@ export class UserController {
     return this.userService.activate(link);
   }
 
-
-  // @Get()
-  // findAll() {
-  //   return this.userService.findAll();
-  // }
-
-
   @ApiOperation({summary: "logout user"})
   @ApiResponse({status: 200, type: User})
   @HttpCode(HttpStatus.OK)

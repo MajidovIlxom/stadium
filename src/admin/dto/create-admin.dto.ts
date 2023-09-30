@@ -20,5 +20,13 @@ export class CreateAdminDto {
 
     @IsStrongPassword()
     @MinLength(6)
-    hashed_password: string;
+    password: string;
+    
+    
+    @IsStrongPassword()
+    @MinLength(6)
+    confirm_password: string;
+
+
+
 }

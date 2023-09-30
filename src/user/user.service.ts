@@ -65,6 +65,7 @@ export class UserService {
     const tokens = await this.getToken(newUser);
     const hashed_refresh_token = await bcrypt.hash(tokens.refresh_token, 7)
     const  uniqueKey: string = v4();
+    console.log('uniqueKey: ', uniqueKey);
 
     const updatedUser = await this.userRepo.update(
       {

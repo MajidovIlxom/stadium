@@ -1,10 +1,14 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
+import { Admin } from 'src/admin/Models/admin.models';
 import { User } from 'src/user/Models/user.models';
 
 
 @Injectable()
 export class MailService {
+  sendConfirmation(arg0: User) {
+    throw new Error('Method not implemented.');
+  }
   constructor(private mailerService: MailerService){}
 
   async sendUserConfirmation(user: User): Promise<void>{
@@ -20,42 +24,18 @@ export class MailService {
     })
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  // create(createMailDto: CreateMailDto) {
-  //   return 'This action adds a new mail';
-  // }
-
-  findAll() {
-    return `This action returns all mail`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} mail`;
-  }
-
-  // update(id: number, updateMailDto: UpdateMailDto) {
-  //   return `This action updates a #${id} mail`;
-  // }
-
-  remove(id: number) {
-    return `This action removes a #${id} mail`;
+  async sendAdminConfirmation(admin: Admin): Promise<void>{
+    const url = `${process.env.API_HOST}/api/admin/activate/${admin.activation_link}`;
+    await this.mailerService.sendMail({
+      to: admin.email,
+      subject: 'Welcome to Stadium App! Confirum your Email',
+      template: "./confirmation",
+      context: {
+        name: admin.username,
+        url,
+      }
+    })
   }
 }
+
+
